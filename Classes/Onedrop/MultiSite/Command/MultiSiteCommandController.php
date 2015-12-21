@@ -41,6 +41,7 @@ class MultiSiteCommandController extends CommandController
             $this->outputLine('Created a new site "%s"', array($site->getName()));
         } catch (\Exception $e) {
             $this->systemLogger->logException($e);
+            $this->outputLine('An error occured during site creation, check error log for details');
         }
     }
 }

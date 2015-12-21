@@ -5,14 +5,13 @@ namespace Onedrop\MultiSite\Controller\Module\Administration;
 use Onedrop\MultiSite\Service\SiteService;
 use TYPO3\Flow\Annotations as Flow;
 use TYPO3\Flow\Package\PackageManagerInterface;
-use TYPO3\Neos\Controller\Module\AbstractModuleController;
 
 /**
  * Class SitesController
  *
  * @package Onedrop\MultiSite\Controller\Module\Administration
  */
-class SitesController extends AbstractModuleController
+class SitesController extends \TYPO3\Neos\Controller\Module\Administration\SitesController
 {
 
     /**
@@ -32,7 +31,7 @@ class SitesController extends AbstractModuleController
      *
      * @return void
      */
-    public function newSiteAction()
+    public function newMultiSiteAction()
     {
         $sitePackages = $this->packageManager->getFilteredPackages('available', null, 'typo3-flow-site');
         $this->view->assignMultiple(array(
@@ -41,12 +40,13 @@ class SitesController extends AbstractModuleController
     }
 
     /**
-     * @param string $sitePackage
+     * @param string $packageKey
      * @param string $siteName
      */
-    public function createSiteFromSitePackage($sitePackage, $siteName= '')
+    public function createMultiSiteAction($packageKey, $siteName= '')
     {
-
+        $this->siteService->importSiteFromTemplate($packageKey, $siteName);
+        $this->redirect('index');
     }
 
 }

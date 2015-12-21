@@ -1,0 +1,15 @@
+TYPO3:
+  Neos:
+    modules:
+      administration:
+        submodules:
+          sites:
+            label: 'TYPO3.Neos:Modules:sites.label'
+            controller: '\Onedrop\MultiSite\Controller\Module\Administration\SitesController'
+            description: 'Multisite Management'
+            icon: 'icon-globe'
+            actions:
+              newMultiSite:
+                label: 'New Multisite'
+                title: 'New Multisite'
+            privilegeTarget: 'TYPO3.Neos:Backend.Module.Administration.Sites'

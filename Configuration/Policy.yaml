@@ -1,0 +1,17 @@
+#                                                                        #
+# Security policy for the Neos package                             #
+#                                                                        #
+
+privilegeTargets:
+
+  'TYPO3\Flow\Security\Authorization\Privilege\Method\MethodPrivilege':
+    'Onedrop.MultiSite:Backend.Module.Administration.Sites':
+      matcher: 'method(Onedrop\MultiSite\Controller\Module\Administration\SitesController->(index|newMultiSite|createMultiSite|edit|updateSite|newSite|createSite|deleteSite|activateSite|deactivateSite|editDomain|updateDomain|newDomain|createDomain|deleteDomain|activateDomain|deactivateDomain)Action())'
+
+roles:
+
+  'TYPO3.Neos:Administrator':
+    privileges:
+      -
+        privilegeTarget: 'Onedrop.MultiSite:Backend.Module.Administration.Sites'
+        permission: GRANT

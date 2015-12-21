@@ -61,7 +61,7 @@ class SiteService
 
         $siteTemplate = new StandaloneView();
         $siteTemplate->setTemplatePathAndFilename(FLOW_PATH_PACKAGES . 'Sites/' . $sitePackage . '/Resources/Private/Templates/Content/Sites.xml');
-        $siteTemplate->assignMultiple(['siteName' => $siteName, 'siteNodeName' => strtolower($siteName), 'packageKey' => $sitePackage]);
+        $siteTemplate->assignMultiple(['siteName' => $siteName, 'siteNodeName' => \TYPO3\TYPO3CR\Utility::renderValidNodeName($siteName), 'packageKey' => $sitePackage]);
 
         $generatedSiteImportXmlContent = $siteTemplate->render();
 
