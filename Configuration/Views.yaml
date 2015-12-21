@@ -1,0 +1,4 @@
+-
+  requestFilter: 'isPackage("TYPO3.Neos") && isController("Module\Administration\Sites") && isAction("index") && isFormat("html")'
+  options:
+    templatePathAndFilename: 'resource://Onedrop.MultiSite/Private/Templates/Module/Administration/Sites/Index.html'
