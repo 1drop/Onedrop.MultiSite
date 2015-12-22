@@ -34,11 +34,11 @@
 					</div>
 				</div>
 				<legend>{neos:backend.translate(id: 'sites.selectBasedomain', value: 'Select base domain')}</legend>
-				<div class="neos-control-group{f:validation.ifHasErrors(for: 'siteName', then: ' neos-error')}">
-					<label class="neos-control-label" for="site-name">{neos:backend.translate(id: 'sites.name', value: 'Site name')}</label>
+				<div class="neos-control-group{f:validation.ifHasErrors(for: 'baseDomain', then: ' neos-error')}">
+					<label class="neos-control-label" for="base-domain">{neos:backend.translate(id: 'sites.baseDomain', value: 'Base domain')}</label>
 					<div class="neos-controls">
-						<f:form.textfield name="siteName" value="{siteName}" id="site-name" />
-						<f:render partial="Module/Shared/FieldValidationResults" arguments="{fieldname: 'siteName'}"/>
+						<f:form.select name="baseDomain" options="{possibleDomains}" id="base-domain" />
+						<f:render partial="Module/Shared/FieldValidationResults" arguments="{fieldname: 'baseDomain'}"/>
 					</div>
 				</div>
 			</fieldset>

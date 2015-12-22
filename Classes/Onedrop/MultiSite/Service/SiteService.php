@@ -4,15 +4,11 @@ namespace Onedrop\MultiSite\Service;
 use TYPO3\Flow\Annotations as Flow;
 use TYPO3\Flow\Http\Request;
 use TYPO3\Flow\Utility\Environment;
-use TYPO3\Flow\Utility\Files;
 use TYPO3\Fluid\View\StandaloneView;
 use TYPO3\Neos\Domain\Model\Domain;
 use TYPO3\Neos\Domain\Model\Site;
 use TYPO3\Neos\Domain\Repository\DomainRepository;
-use TYPO3\Neos\Domain\Repository\SiteRepository;
 use TYPO3\Neos\Domain\Service\SiteImportService;
-use TYPO3\TYPO3CR\Domain\Repository\NodeDataRepository;
-use TYPO3\TYPO3CR\Domain\Repository\WorkspaceRepository;
 
 /**
  * A service for manipulating sites
@@ -74,7 +70,7 @@ class SiteService
         $domain = new Domain();
         $domain->setActive(true);
         $domain->setSite($site);
-        $domain->setHostPattern(strtolower($siteName) . '.' . $baseDomain);
+        $domain->setHostPattern(\TYPO3\TYPO3CR\Utility::renderValidNodeName($siteName) . '.' . $baseDomain);
         $this->domainRepository->add($domain);
 
         return $site;

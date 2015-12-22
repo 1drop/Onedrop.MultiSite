@@ -34,18 +34,30 @@ class SitesController extends \TYPO3\Neos\Controller\Module\Administration\Sites
     public function newMultiSiteAction()
     {
         $sitePackages = $this->packageManager->getFilteredPackages('available', null, 'typo3-flow-site');
+        $host = $this->request->getHttpRequest()->getBaseUri()->getHost();
+        $possibleDomains = [];
+        $hostParts = explode('.', $host);
+        while (count($hostParts) > 1) {
+            $possibleDomain = implode('.', $hostParts);
+            $possibleDomains[$possibleDomain] = $possibleDomain;
+            array_shift($hostParts);
+        }
+
         $this->view->assignMultiple(array(
-            'sitePackages' => $sitePackages
+            'sitePackages' => $sitePackages,
+            'possibleDomains' => $possibleDomains
         ));
     }
 
     /**
      * @param string $packageKey
+     * @param string $baseDomain
      * @param string $siteName
+     * @Flow\Validate(argumentName="$siteName", type="\TYPO3\Flow\Validation\Validator\NotEmptyValidator")
      */
-    public function createMultiSiteAction($packageKey, $siteName= '')
+    public function createMultiSiteAction($packageKey, $baseDomain, $siteName= '')
     {
-        $this->siteService->importSiteFromTemplate($packageKey, $siteName);
+        $this->siteService->importSiteFromTemplate($packageKey, $siteName, $baseDomain);
         $this->redirect('index');
     }
 
